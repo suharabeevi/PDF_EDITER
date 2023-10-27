@@ -14,6 +14,7 @@ var usersRouter = require('./Routes/UserRouter');
 // middlewares
 app.use(express.json());
 app.use(express.urlencoded({extended: false}))
+app.use(bodyParser.json());
 app.use(cors());
 app.use(morgan("dev"));
 // Create an HTTP server and pass the Express app to it
@@ -22,6 +23,8 @@ dbConnect();
 expressConfig(app);
 // Assuming serverConfig is a function that configures your server
 serverConfig(server).startServer();
+
+
 app.use("/api/users", usersRouter);
 
 // catch 404 and forward to error handler
