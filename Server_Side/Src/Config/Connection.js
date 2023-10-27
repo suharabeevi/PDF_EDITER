@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 require('dotenv').config()
 const configKeys=require('../Config')
 const dbConnect = async () => {
+  //database connection
   try {
     const dbOptions = {
       dbName: configKeys.DB_NAME, 
