@@ -1,12 +1,12 @@
 const  User  = require("../Models/UserModel");
 const bcrypt = require("bcrypt");
+const pdfSchema = require('../Models/DocumentsModel')
 
 module.exports = {
   //user signup
   UserSignup: async (req, res) => {
     try {
       console.log(req.body);
-
       const user = await User.findOne({ email: req.body?.email });
       if (user)
         return res
@@ -47,5 +47,18 @@ module.exports = {
       res.status(500).send({ message: "Internal Server Error" + error });
     }
   },
+  // upload pdf
+  uploadfiles:async(req,res)=>{
+    const title =req.body.title
+    console.log(req.file);
+    const fileName = req.file?.path;
+    try{
+       await pdfSchema.create({title:title,pdfFiles:fileName})
+       return res.send({status:true ,message: "upload document Successfully"})
+    }
+    catch(error){
+     res.json({status:error})
+    }
+  }
   
 };
