@@ -8,7 +8,6 @@ const expressConfig = require('./Config/Express');
 const dbConnect=require('./Config/Connection')
 const serverConfig = require('./Config/Server');
 const configKeys = require('./Config');
-
 var usersRouter = require('./Routes/UserRouter');
 // Create an Express application
 // middlewares
@@ -17,6 +16,17 @@ app.use(express.urlencoded({extended: false}))
 app.use(bodyParser.json());
 app.use(cors());
 app.use(morgan("dev"));
+
+// Use express-session middleware
+// app.use(session({
+//     secret: 'keyboard cat',
+//     key: 'user_id',
+//     resave: false,
+//     saveUninitialized : false,
+//     cookie : {
+//       maxAge : 60000000
+//     }
+//   }));
 // Create an HTTP server and pass the Express app to it
 const server = http.createServer(app);
 dbConnect();
