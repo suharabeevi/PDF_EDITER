@@ -2,6 +2,11 @@ const  User  = require("../Models/UserModel");
 const bcrypt = require("bcrypt");
 const documents = require('../Models/Documents');
 const { token } = require("morgan");
+const mongoose =require('mongoose')
+const objectId = require("mongodb").ObjectId;
+const { ObjectId } = require("bson");
+
+
 
 module.exports = {
   //user signup
@@ -77,7 +82,35 @@ module.exports = {
     } catch (error) {
       res.json({ status: false, error: error.message });
     }
+  },
+//get PDF files
+Get_files : async (req, res) => {
+  const user = req.user._id;
+
+  try {
+    const result= await documents.aggregate([
+      {
+         $match: {
+              user: new objectId(user),
+            },
+      },
+      {
+        $unwind: "$pdfFiles",
+      },
+      {
+        $project: {
+          _id: 0,
+          path: "$pdfFiles.path",
+          title: "$pdfFiles.title",
+        },
+      },
+    ]).exec(); // Remove the callback
+
+    res.send({ status: "get all files", data: result });
+  } catch (error) {
+    res.json({ status: false, error: error.message });
   }
 
+}
   
 };
