@@ -3,9 +3,12 @@ const mongoose = require('mongoose');
 const pdfSchema = new mongoose.Schema({
   pdfFiles: [
     {
-      path: { type: String,trim: true },
-      title: { type: String, trim: true },
-
+      path:{ type: String,trim: true },
+    },
+  ],
+  newPdffiles: [
+    {
+      path:{ type: String,trim: true, required:false},
     },
   ],
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User',},

@@ -8,10 +8,11 @@ cloudinary.config({
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET
 });
-
 // Multer configuration
 const storageOptions = {
+ 
   cloudinary: cloudinary,
+  
   params: {
     resource_type: 'auto',
     folder: 'PDF_folder',
@@ -28,3 +29,14 @@ const storage = new CloudinaryStorage(storageOptions);
 const upload = multer({ storage: storage }).single('pdfFile');
 
 module.exports = upload;
+
+
+// const multer =require('multer')
+
+// const storage = multer.memoryStorage()
+
+// const upload = multer({
+//     storage,
+// })
+
+// module.exports=upload

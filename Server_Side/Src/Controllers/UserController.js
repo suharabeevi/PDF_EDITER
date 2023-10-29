@@ -1,6 +1,6 @@
 const  User  = require("../Models/UserModel");
 const bcrypt = require("bcrypt");
-const documents = require('../Models/Documents');
+const documents = require('../models/pfdmodel');
 const { token } = require("morgan");
 const mongoose =require('mongoose')
 const objectId = require("mongodb").ObjectId;
@@ -56,6 +56,7 @@ module.exports = {
 
   // upload pdf
    uploadFiles: async (req, res) => {
+    console.log(req.body,req.file);
     let user = req.user._id;
     const title = req.body.title;
     const fileName = req.file ? req.file.path : null;
