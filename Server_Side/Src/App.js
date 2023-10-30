@@ -34,7 +34,6 @@ expressConfig(app);
 // Assuming serverConfig is a function that configures your server
 serverConfig(server).startServer();
 
-app.use("/api/auth",usersRouter)
 app.use("/api/user", usersRouter);
 
 

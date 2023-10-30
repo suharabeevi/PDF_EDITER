@@ -18,6 +18,7 @@ const storageOptions = {
     folder: 'PDF_folder',
     allowed_formats: [ 'pdf'],
     public_id: (req, file) => {
+      console.log(file,"normal buffer");
         // remove the file extension from the file name
         const fileName = file.originalname.split('.').slice(0, -1).join('.');
         return fileName+new Date();
